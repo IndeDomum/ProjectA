@@ -1,0 +1,28 @@
+Script:
+
+CREATE TABLE gebruikers(
+moderator_id serial primary key,
+naam text unique not null,                         	#voer deze eerst uit
+wachtwoord text not null		#ander klopt de foreign key niet
+);
+
+CREATE TABLE tweets(
+tweet_id serial primary key,
+naam varchar(50),
+bericht varchar(140) not null,
+datum timestamp,
+keuring varchar(255),
+opmerking text,
+moderator_id integer,
+updated_at timestamp,
+FOREIGN KEY (moderator_id) REFERENCES gebruikers(moderator_id)
+);
+
+Insert:
+
+INSERT INTO gebruikers (naam, wachtwoord)
+VALUES ('Tim', 'test123'); 
+
+INSERT INTO public.tweets(
+	naam, bericht, datum, opmerking, moderator_id, updated_at, keuring)
+	VALUES ('Hans', 'Piet is niet cool', '2020-11-03 12:52:11', null, null, null, null);
